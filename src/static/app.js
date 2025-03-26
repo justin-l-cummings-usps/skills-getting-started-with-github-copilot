@@ -18,7 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const activityCard = document.createElement("div");
         activityCard.className = "activity-card";
 
-        const spotsLeft = details.max_participants - details.participants.length;
+        const participantsArray = Array.from(details.participants); // Transform set to array
+        const spotsLeft = details.max_participants - participantsArray.length;
 
         activityCard.innerHTML = `
           <h4>${name}</h4>
@@ -28,8 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="participants">
             <strong>Participants:</strong>
             ${
-              details.participants.length > 0
-                ? `<ul>${details.participants.map(participant => `<li>${participant}</li>`).join("")}</ul>`
+              participantsArray.length > 0
+                ? `<ul>${participantsArray.map(participant => `<li>${participant}</li>`).join("")}</ul>`
                 : "<p>No participants yet. Be the first to sign up!</p>"
             }
           </div>
