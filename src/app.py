@@ -85,7 +85,15 @@ def root():
 
 @app.get("/activities")
 def get_activities():
-    return activities
+    # Convert participants sets to lists for JSON serialization
+    serialized_activities = {
+        name: {
+            **details,
+            "participants": list(details["participants"])
+        }
+        for name, details in activities.items()
+    }
+    return serialized_activities
 
 
 @app.post("/activities/{activity_name}/signup")
